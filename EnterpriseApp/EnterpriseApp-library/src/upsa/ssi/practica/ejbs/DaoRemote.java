@@ -5,10 +5,16 @@
  */
 package upsa.ssi.practica.ejbs;
 
+import java.util.Collection;
+import upsa.ssi.practica.beans.Equipo;
+import upsa.ssi.practica.exceptions.EnterpriseAppException;
+
 /**
  *
  * @author Guille
  */
 public interface DaoRemote {
-    
+     
+    public Collection<Equipo> selectEquipos() throws EnterpriseAppException; 
+
 }

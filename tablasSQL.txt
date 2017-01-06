@@ -1,0 +1,58 @@
+CREATE TABLE EQUIPOS
+(
+ ID VARCHAR2(3),
+ NOMBRE VARCHAR2(50),
+ ESTADIO VARCHAR2(50),
+ CONSTRAINT "PK_EQUIPO" PRIMARY KEY (ID)
+);
+CREATE TABLE JUGADORES
+(
+ ID VARCHAR2(5),
+ EQUIPOS_ID VARCHAR2(3),
+ NOMBRE VARCHAR2(50),
+ APELLIDO1 VARCHAR2(50),
+ POSICION VARCHAR2(30);
+ CONSTRAINT "PK_JUGADORES" PRIMARY KEY (ID),
+ CONSTRAINT "FK_JUGADORES->EQUIPOS" FOREIGN KEY (EQUIPOS_ID)
+ REFERENCES EQUIPOS (ID)
+);
+CREATE SEQUENCE SEQ_JUGADORES START WITH 1 INCREMENT BY 1 MINVALUE 1 MAXVALUE 99998 ORDER;
+Insert into EQUIPOS (ID,NOMBRE,ESTADIO,IMG) values ('ATM','Atletico de Madrid','Vicente Calderon','atm.png');
+Insert into EQUIPOS (ID,NOMBRE,ESTADIO,IMG) values ('ARS','Arsenal','Emirates Stadium','ars.png');
+Insert into EQUIPOS (ID,NOMBRE,ESTADIO,IMG) values ('BCN','Barcelona F.C.','Camp Nou','bcn.png');
+Insert into EQUIPOS (ID,NOMBRE,ESTADIO,IMG) values ('PSG','Paris Saint-Germain','Parque de los principes','psg.png');
+Insert into EQUIPOS (ID,NOMBRE,ESTADIO,IMG) values ('BAY','Bayern Munich','Allianz Arena','bay.png');
+Insert into EQUIPOS (ID,NOMBRE,ESTADIO,IMG) values ('RMA','Real Madrid','Santiago Bernabeu','rma.png');
+
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('103','ATM','Antoine','Griezman','Delantero');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('104','ATM','Gabi','Fernandez','Medio centro defensivo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('105','ATM','Yannick','Carrasco','Extremo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('106','ATM','Augusto','Fernandez','Medio centro ofensivo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('107','ATM','Jesus','Gamez','Lateral');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('108','ATM','Saul','Ã?iguez','Medio centro ofensivo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('109','ATM','Juanfran','Torres','Lateral');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('110','ARS','Alex','Oxlade-Chamberlain','Medio centro defensivo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('111','ARS','David','Ospina','Portero');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('112','ARS','Olivier','Giroud','Delantero');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('113','ARS','Mathieu','Debuchy','Central');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('114','ARS','Mesut','Ozil','Medio centro ofensivo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('115','ARS','Santi','Cazorla','Extremo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('124','PSG','Marco','Veratti','Extremo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('117','BCN','Andres','Iniesta','Medio centro ofensivo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('118','BCN','Neymar','Junior','Delantero');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('119','BCN','Leo','Messi','Delantero');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('120','BCN','Luis','Suarez','Delantero');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('121','BCN','Daniel','Alves','Lateral');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('122','BCN','Sergio','Busquets','Medio centro defensivo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('123','PSG','Adrien','Rabiot','Central');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('125','PSG','Thiago','Silva','Central');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('126','PSG','Javier','Pastore','Medio centro ofensivo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('127','BAY','David','Alaba','Lateral');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('128','BAY','Javier','Martinez','Medio centro defensivo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('129','BAY','Arturo','Vidal','Medio centro defensivo');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('151','BCN','aaaaa','bbbb','Portero');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('133','RMA','Daniel','Carvajal','Lateral');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('134','RMA','Cristiano','Ronaldo','Delantero');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('135','RMA','Karim','Benzema','Delantero');
+Insert into JUGADORES (ID,EQUIPOS_ID,NOMBRE,APELLIDO,POSICION) values ('136','RMA','Gareth','Bale','Extremo');
+commit;

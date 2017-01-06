@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="estilos.css">
+        <link rel="stylesheet" type="text/css" href="../estilos.css">
         <title>JSP Page</title>
     </head>
     <body>
@@ -34,7 +34,7 @@
                           
                               
                             <td><a href="${urlEquipo}"> ${equipo.nombre}</a></td>
-                            <td> <img src="${equipo.imagen}" alt="${equipo.nombre}"  height="42" width="42"/> </td>
+                            <td> <img src="../${equipo.imagen}" alt="${equipo.nombre}"  height="42" width="42"/> </td>
                            
                            
                       </tr>  

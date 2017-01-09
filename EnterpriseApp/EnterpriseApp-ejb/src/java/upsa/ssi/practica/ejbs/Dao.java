@@ -5,8 +5,10 @@
  */
 package upsa.ssi.practica.ejbs;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import upsa.ssi.practica.beans.Equipo;
+import upsa.ssi.practica.beans.Jugador;
 import upsa.ssi.practica.exceptions.EnterpriseAppException;
 
 /**
@@ -15,4 +17,6 @@ import upsa.ssi.practica.exceptions.EnterpriseAppException;
  */
 public interface Dao {
     public Collection<Equipo> selectEquipos() throws EnterpriseAppException;
+    public Jugador insertJugador(String nombre, String equipos_id, String apellido, String posicion) throws EnterpriseAppException;
+
 }

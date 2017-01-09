@@ -20,9 +20,13 @@ import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import upsa.ssi.practica.beans.Equipo;
+import upsa.ssi.practica.beans.JugadorForm;
+import upsa.ssi.practica.exceptions.EnterpriseAppException;
 import upsa.ssi.practica.jaxrs.cdi.Logica;
 
 /**
@@ -59,8 +63,13 @@ public class EquiposResource {
     }
 
     
-//    @POST
-//    @Consumes(MediaType.TEXT_HTML)
-//    public Response insertEquipo(@BeanParam EquipoForm equipoForm) {
-//    }
+    @POST
+    @Consumes( MediaType.APPLICATION_FORM_URLENCODED )
+    public Response insertProducto(@BeanParam JugadorForm jugadorForm) throws EnterpriseAppException
+    {
+        
+        logica.insertJugador( jugadorForm.getNombre(), jugadorForm.getEquipos_id(), jugadorForm.getApellido(), jugadorForm.getPosicion());
+        
+        return Response.created(uriInfo.getAbsolutePath() ).build();
+    }
 }

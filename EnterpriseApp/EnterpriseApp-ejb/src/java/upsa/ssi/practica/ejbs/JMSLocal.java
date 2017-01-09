@@ -5,10 +5,12 @@
  */
 package upsa.ssi.practica.ejbs;
 
+import upsa.ssi.practica.exceptions.EnterpriseAppException;
+
 /**
  *
  * @author Guille
  */
 public interface JMSLocal {
-    
+    public void send(String message) throws EnterpriseAppException;
 }

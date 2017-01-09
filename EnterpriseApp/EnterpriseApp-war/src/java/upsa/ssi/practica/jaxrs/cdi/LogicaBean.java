@@ -20,12 +20,14 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 import upsa.ssi.practica.beans.Equipo;
+import upsa.ssi.practica.beans.Jugador;
 import upsa.ssi.practica.ejbs.DaoRemote;
 import upsa.ssi.practica.ejbs.JMSLocal;
 import upsa.ssi.practica.exceptions.EnterpriseAppException;
 
-@EJBs({@EJB(name="ejb/dao", beanInterface = DaoRemote.class, lookup = "java:app/EnterpriseApp-ejb/DaoBean!upsa.ssi.practica.ejbs.DaoRemote")
-       //@EJB(name="ejb/jms", beanInterface = JMSLocal.class,  lookup = "java:app/EARapp-ejb/JMSBean!ssi.ejbs.earapp.ejbs.JMSLocal")
+@EJBs({@EJB(name="ejb/dao", beanInterface = DaoRemote.class, lookup = "java:app/EnterpriseApp-ejb/DaoBean!upsa.ssi.practica.ejbs.DaoRemote"),
+       @EJB(name="ejb/jms", beanInterface = JMSLocal.class,  lookup = "java:app/EnterpriseApp-ejb/JMSBean!upsa.ssi.practica.ejbs.JMSLocal")
+                                                                       
       })
 
 
@@ -38,6 +40,9 @@ public class LogicaBean implements Logica{
     @EJB(name="ejb/dao")
     private DaoRemote dao;
     
+    @EJB(name="ejb/jms")
+    private JMSLocal jms;
+    
     @Resource
     private SessionContext sessionContext;
     
@@ -49,4 +54,16 @@ public class LogicaBean implements Logica{
     {
         return dao.selectEquipos();
     }
+    
+    @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Jugador insertJugador(String nombre, String equipos_id, String apellido, String posicion) throws EnterpriseAppException
+    {
+        Jugador jugador = dao.insertJugador(nombre, equipos_id, apellido, posicion);
+        //jms.send( jugador.getPosicion());
+        return jugador;
+    }
+
+    
+    
 }

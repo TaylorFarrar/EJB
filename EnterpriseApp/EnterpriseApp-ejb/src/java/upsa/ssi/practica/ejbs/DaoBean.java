@@ -5,10 +5,12 @@
  */
 package upsa.ssi.practica.ejbs;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.Collection;
 import java.util.LinkedList;
 import javax.annotation.Resource;
@@ -17,6 +19,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import upsa.ssi.practica.beans.Equipo;
+import upsa.ssi.practica.beans.Jugador;
 import upsa.ssi.practica.exceptions.EnterpriseAppException;
 import upsa.ssi.practica.exceptions.SQLEARappException;
 
@@ -60,6 +63,41 @@ public class DaoBean implements DaoRemote, Dao{
                 }
         } catch (SQLException sqlException) { throw new SQLEARappException( sqlException ); }
         return equipos;
+    }
+
+    @Override
+    public Jugador insertJugador(String nombre, String equipos_id, String apellido, String posicion) throws EnterpriseAppException {
+        String consulta = "{CALL INSERT INTO JUGADORES(     ID,                EQUIPOS_ID,  NOMBRE, apellido,  POSICION) "
+                + "                             VALUES(SEQ_JUGADORES.NEXTVAL,       ?,          ?,      ?,          ?)    "
+                + "                             RETURNING ID INTO ?}";
+        
+        try(
+                Connection connection = dataSource.getConnection();
+                CallableStatement cs = connection.prepareCall(consulta);
+                
+           )
+        {
+            cs.setString(1,equipos_id);
+            cs.setString(2,nombre);
+            cs.setString(3,apellido);
+            cs.setString(4,posicion);
+            
+            cs.registerOutParameter(5, Types.VARCHAR);
+            
+            cs.execute();
+            
+            Jugador jugador = new Jugador();
+            jugador.setId(cs.getString(5));
+            jugador.setEquipos_id(equipos_id);
+            jugador.setNombre(nombre);
+            jugador.setApellido(apellido);
+            jugador.setPosicion(posicion);
+            
+            return jugador;
+            
+            
+        } catch (SQLException sqlException) { throw new SQLEARappException( sqlException ); }
+        
     }
     
 }

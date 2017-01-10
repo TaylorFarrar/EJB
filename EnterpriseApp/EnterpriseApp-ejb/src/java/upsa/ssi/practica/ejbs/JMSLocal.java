@@ -5,6 +5,8 @@
  */
 package upsa.ssi.practica.ejbs;
 
+import upsa.ssi.practica.beans.DatosMessageJugador;
+import upsa.ssi.practica.beans.Jugador;
 import upsa.ssi.practica.exceptions.EnterpriseAppException;
 
 /**
@@ -12,5 +14,5 @@ import upsa.ssi.practica.exceptions.EnterpriseAppException;
  * @author Guille
  */
 public interface JMSLocal {
-    public void send(String message) throws EnterpriseAppException;
+    public void send(DatosMessageJugador jugador) throws EnterpriseAppException;
 }

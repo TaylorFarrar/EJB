@@ -16,6 +16,8 @@ import javax.inject.Inject;
 import javax.jms.JMSConnectionFactory;
 import javax.jms.JMSContext;
 import javax.jms.Queue;
+import upsa.ssi.practica.beans.DatosMessageJugador;
+import upsa.ssi.practica.beans.Jugador;
 import upsa.ssi.practica.exceptions.EnterpriseAppException;
 import upsa.ssi.practica.exceptions.RollbackEARappException;
 
@@ -30,27 +32,32 @@ public class JMSBean implements JMSRemote, JMSLocal{
     private Queue queue;
     
     @Inject
-    @JMSConnectionFactory("jms/ssiConnectionFactoryTX")
+    @JMSConnectionFactory("jms/GuilleConnectionFactoryTX")
     private JMSContext jmsContext;
     
     @Resource
     private SessionContext sessionContext;
 
+    
+
     @Override
-    public void send(String message) throws EnterpriseAppException 
-    {        
-       jmsContext.createProducer().send(queue, message);
+    public void send(DatosMessageJugador jugador) throws EnterpriseAppException {
+        
+        System.out.println("->"+jugador.getNombre());
+        System.out.println("->"+jugador.getApellido());
+        System.out.println("->"+jugador.getEquipos_id());
+        System.out.println("->"+jugador.getPosicion());
+        
+        jmsContext.createProducer().send(queue, jugador);
        
-        String posicion =  message ;
-        if (posicion.equals("Delantero"))
-        {
-            Logger.getGlobal().log(Level.INFO, "Hacemos rollback");
-            throw new RollbackEARappException();
-        }
-       
-       
-       
+//        String posicion =  message ;
+//        if (posicion.equals("Delantero"))
+//        {
+//            Logger.getGlobal().log(Level.INFO, "Hacemos rollback");
+//            throw new RollbackEARappException();
+//        }
        
     }
+
     
 }

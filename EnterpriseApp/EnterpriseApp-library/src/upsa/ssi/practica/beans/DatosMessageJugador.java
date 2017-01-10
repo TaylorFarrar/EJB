@@ -5,38 +5,31 @@
  */
 package upsa.ssi.practica.beans;
 
-import javax.ws.rs.FormParam;
+import java.io.Serializable;
 
 /**
  *
  * @author Guille
  */
-public class JugadorForm {
+public class DatosMessageJugador implements Serializable{
     
-    
-    @FormParam("id")
-    private String id;
-
-    @FormParam("equipos_id")
     private String equipos_id;
-
-    @FormParam("nombre")
     private String nombre;
-
-    @FormParam("apellido")
     private String apellido;
-    
-    @FormParam("posicion")
     private String posicion;
 
-    public String getId() {
-        return id;
+    public DatosMessageJugador() {
     }
 
-    public void setId(String id) {
-        this.id = id;
+    
+    public DatosMessageJugador(String equipos_id, String nombre, String apellido, String posicion) {
+        this.equipos_id = equipos_id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.posicion = posicion;
     }
 
+    
     public String getEquipos_id() {
         return equipos_id;
     }
@@ -68,6 +61,12 @@ public class JugadorForm {
     public void setPosicion(String posicion) {
         this.posicion = posicion;
     }
+
+    @Override
+    public String toString() {
+        return "DatosMessageJugador{" + "equipos_id=" + equipos_id + ", nombre=" + nombre + ", apellido=" + apellido + ", posicion=" + posicion + '}';
+    }
+    
     
     
 }

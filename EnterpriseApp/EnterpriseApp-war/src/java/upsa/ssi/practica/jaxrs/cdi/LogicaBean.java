@@ -19,6 +19,7 @@ import javax.ejb.TransactionManagementType;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
+import upsa.ssi.practica.beans.DatosMessageJugador;
 import upsa.ssi.practica.beans.Equipo;
 import upsa.ssi.practica.beans.Jugador;
 import upsa.ssi.practica.ejbs.DaoRemote;
@@ -57,11 +58,20 @@ public class LogicaBean implements Logica{
     
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Jugador insertJugador(String nombre, String equipos_id, String apellido, String posicion) throws EnterpriseAppException
+    public void insertJugador(String nombre, String equipos_id, String apellido, String posicion) throws EnterpriseAppException
     {
-        Jugador jugador = dao.insertJugador(nombre, equipos_id, apellido, posicion);
-        //jms.send( jugador.getPosicion());
-        return jugador;
+        //Jugador jugador = dao.insertJugador(nombre, equipos_id, apellido, posicion);
+        
+        DatosMessageJugador dmj = new DatosMessageJugador();
+        dmj.setEquipos_id(equipos_id);
+        dmj.setNombre(nombre);
+        dmj.setApellido(apellido);
+        dmj.setPosicion(posicion);
+
+        System.out.println(dmj.toString());
+        
+        jms.send(   dmj   );
+        
     }
 
     

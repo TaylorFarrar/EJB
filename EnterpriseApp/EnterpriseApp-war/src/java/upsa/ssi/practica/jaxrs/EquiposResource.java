@@ -69,7 +69,6 @@ public class EquiposResource {
     {
         
         logica.insertJugador( jugadorForm.getNombre(), jugadorForm.getEquipos_id(), jugadorForm.getApellido(), jugadorForm.getPosicion());
-        
         return Response.created(uriInfo.getAbsolutePath() ).build();
     }
 }

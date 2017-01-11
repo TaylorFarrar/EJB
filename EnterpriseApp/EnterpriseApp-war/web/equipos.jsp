@@ -26,8 +26,8 @@
             <tbody>
                 <c:forEach var="equipo" items="${equipos}">    
                     
-                    <c:url var="urlEquipo" value="/equipo.do">
-                            <c:param name="id" value="${equipo.id}"/>
+                    <c:url var="urlEquipo" value="equipos/${equipo.id}">
+                            
                     </c:url>
 
                       <tr>

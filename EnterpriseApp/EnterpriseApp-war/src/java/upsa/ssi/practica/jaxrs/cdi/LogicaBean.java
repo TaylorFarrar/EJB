@@ -56,11 +56,21 @@ public class LogicaBean implements Logica{
         return dao.selectEquipos();
     }
     
+    
+//    @Produces
+//    @Named("equipo")   
+//    @RequestScoped
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Equipo getEquipo(String id) throws EnterpriseAppException
+    {
+        return dao.selectEquipo(id);
+    }
+    
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void insertJugador(String nombre, String equipos_id, String apellido, String posicion) throws EnterpriseAppException
     {
-        //Jugador jugador = dao.insertJugador(nombre, equipos_id, apellido, posicion);
+        
         
         DatosMessageJugador dmj = new DatosMessageJugador();
         dmj.setEquipos_id(equipos_id);

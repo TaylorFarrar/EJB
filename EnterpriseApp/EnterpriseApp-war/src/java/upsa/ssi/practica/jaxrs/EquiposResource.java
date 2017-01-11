@@ -8,6 +8,7 @@ package upsa.ssi.practica.jaxrs;
 import java.io.IOException;
 import java.util.Collection;
 import javax.ejb.EJB;
+import javax.ejb.EJBs;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -22,18 +23,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import upsa.ssi.practica.beans.Equipo;
+import upsa.ssi.practica.beans.Jugador;
 import upsa.ssi.practica.beans.JugadorForm;
+import upsa.ssi.practica.ejbs.DaoRemote;
+import upsa.ssi.practica.ejbs.JMSLocal;
 import upsa.ssi.practica.exceptions.EnterpriseAppException;
 import upsa.ssi.practica.jaxrs.cdi.Logica;
 
-/**
- * REST Web Service
- *
- * @author Guille
- */
+@EJBs({@EJB(name="ejb/dao", beanInterface = DaoRemote.class, lookup = "java:app/EnterpriseApp-ejb/DaoBean!upsa.ssi.practica.ejbs.DaoRemote")
+      
+        })
+
 @Path("equipos")
 @RequestScoped
 public class EquiposResource {
@@ -41,8 +45,9 @@ public class EquiposResource {
     @EJB 
     private Logica logica;
     
-    @Inject
-    private Collection<Equipo> equipo;
+    @EJB(name="ejb/dao")
+    private DaoRemote dao;
+    
     
     @Context
     private HttpServletRequest request;
@@ -58,14 +63,30 @@ public class EquiposResource {
    
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public void getHtml() throws ServletException, IOException {
+    public void getHtml() throws ServletException, IOException, EnterpriseAppException {
+        
+        Collection<Equipo> equipos = dao.selectEquipos();
+        request.setAttribute("equipos", equipos);
         request.getRequestDispatcher("/equipos.jsp").forward(request, response);
     }
 
     
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    @Path("{id}")
+    public void getEquipo(@PathParam("id") String id) throws ServletException, IOException, EnterpriseAppException {
+        
+        Equipo equipo = dao.selectEquipo(id);
+        Collection<Jugador> jugadores = dao.selectJugadores(id);
+        request.setAttribute("jugadores", jugadores);
+        request.setAttribute("equipo", equipo);
+        
+        request.getRequestDispatcher("/equipo.jsp").forward(request, response);
+    }
+    
     @POST
     @Consumes( MediaType.APPLICATION_FORM_URLENCODED )
-    public Response insertProducto(@BeanParam JugadorForm jugadorForm) throws EnterpriseAppException
+    public Response insertJugador(@BeanParam JugadorForm jugadorForm) throws EnterpriseAppException
     {
         
         logica.insertJugador( jugadorForm.getNombre(), jugadorForm.getEquipos_id(), jugadorForm.getApellido(), jugadorForm.getPosicion());

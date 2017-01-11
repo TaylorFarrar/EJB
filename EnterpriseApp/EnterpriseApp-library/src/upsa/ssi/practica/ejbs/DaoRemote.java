@@ -18,5 +18,6 @@ public interface DaoRemote {
      
     public Collection<Equipo> selectEquipos() throws EnterpriseAppException;
     public Jugador insertJugador(String nombre, String equipos_id, String apellido, String posicion) throws EnterpriseAppException;
-
+    public Equipo selectEquipo(String id) throws EnterpriseAppException;
+    public Collection<Jugador> selectJugadores(String id) throws EnterpriseAppException;
 }

@@ -70,7 +70,7 @@ public class DaoBean implements DaoRemote, Dao{
 
     @Override
     public Jugador insertJugador(String nombre, String equipos_id, String apellido, String posicion) throws EnterpriseAppException {
-        String consulta = "{CALL INSERT INTO JUGADORES(     ID,                EQUIPOS_ID,  NOMBRE, apellido,  POSICION) "
+        String consulta = "{CALL INSERT INTO JUGADORES(     ID,                EQUIPOS_ID,  NOMBRE, apellido, posicion) "
                 + "                             VALUES(SEQ_JUGADORES.NEXTVAL,       ?,          ?,      ?,          ?)    "
                 + "                             RETURNING ID INTO ?}";
         

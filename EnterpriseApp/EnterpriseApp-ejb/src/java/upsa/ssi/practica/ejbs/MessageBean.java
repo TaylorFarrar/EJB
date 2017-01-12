@@ -42,7 +42,7 @@ public class MessageBean implements MessageListener{
         {
                 
             System.out.println("----Message-->"+message.getBody(DatosMessageJugador.class));
-            Jugador jugador = dao.insertJugador(message.getBody(DatosMessageJugador.class).getNombre(), message.getBody(DatosMessageJugador.class).getEquipos_id(), message.getBody(DatosMessageJugador.class).getApellido(), message.getBody(DatosMessageJugador.class).getApellido());
+            Jugador jugador = dao.insertJugador(message.getBody(DatosMessageJugador.class).getNombre(), message.getBody(DatosMessageJugador.class).getEquipos_id(), message.getBody(DatosMessageJugador.class).getApellido(), message.getBody(DatosMessageJugador.class).getPosicion());
       
         } catch (JMSException ex) 
           {

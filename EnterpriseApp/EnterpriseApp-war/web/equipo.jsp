@@ -22,7 +22,7 @@
         <nav class="navbar navbar-light bg-faded">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#index"><h2 class="display-3">Practica</h2></a>
+                    <a class="navbar-brand" href="../equipos"><h2 class="display-3">Practica</h2></a>
                 </div>
 
 
